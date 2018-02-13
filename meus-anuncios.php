@@ -27,7 +27,7 @@ exit;
 	$a = new Anuncios();
 		
 	$anuncios=$a->getMeusAnuncios();
-	echo "Retorno Anuncios";
+	
 	foreach ($anuncios as $anuncio):
 	?>
 	<tr>
@@ -41,12 +41,13 @@ exit;
 			?>
 		</td>
 		<td><?php  echo $anuncio['titulo']; ?></td>
-		<td><?php  echo number_format($anuncio['valor'],2); ?></td>
+		<td><?php  echo "R$ ".number_format($anuncio['valor'],2); ?></td>
 		<td>
-			<a href="editar-anuncio.php?
-			id=<?php echo $anuncio['id_anuncio']?>" class="btn btn-default">Editar</a>
-			<a href="excluir-anuncio.php?
-			id=<?php echo $anuncio['id_anuncio']?>"  class="btn btn-danger">Excluir</a>
+			<a href="editar-anuncio.php?id=<?php echo $anuncio['id_anuncio']?>" 
+			class="btn btn-default">Editar</a>
+			<a href="excluir-anuncio.php?id=<?php echo $anuncio['id_anuncio']?>"  
+			onclick="return confirm('Excluir Anúncio ?');"
+			class="btn btn-danger">Excluir</a>
 		</td>
 	</tr>
 	<?php	
