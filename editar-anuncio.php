@@ -15,10 +15,17 @@ require 'pages/header.php';
 		$titulo=addslashes($_POST['titulo']);
 		$categoria=addslashes($_POST['categoria']);
 		$valor=addslashes($_POST['valor']);
-		$descr=addslashes(utf8_decode($_POST['descr']));
+		$descr=addslashes($_POST['descr']);
 		$status=addslashes($_POST['status']);
+		if(isset($_FILES['fotos']))
+		{
+			$fotos=$_FILES['fotos'];
+		}else
+		{
+			$fotos=array();
+		}
 
-		$a->updateAnuncio($titulo,$categoria,$valor,$descr,$status, $_GET['id']);
+		$a->updateAnuncio($titulo,$categoria,$valor,$descr,$status,$fotos, $_GET['id']);
 		?>
 		<div class="alert alert-success">Atualizado com sucesso.</div>
 		<?php
@@ -56,7 +63,7 @@ require 'pages/header.php';
 	<div class="form-group">
 		<label for="titulo">Titulo:</label>
 		<input type="text" name="titulo" id="titulo" class="form-control" 
-		value="<?php echo $info['titulo'] ?>">
+		value="<?php echo utf8_encode($info['titulo']); ?>">
 	</div>	
 	<div class="form-group">
 		<label for="valor">Valor:</label>
@@ -77,6 +84,23 @@ require 'pages/header.php';
 		<option value="2" <?php echo ($info['status']=='2')?'selected="selected"':''; ?>>Bom</option>
 		<option value="3" <?php echo ($info['status']=='3')?'selected="selected"':''; ?>>Ótimo</option>
 		</select>
+	</div>
+
+	<div class="form-group">
+		<label for="add_foto">Fotos:</label>
+		<input type="file" name="fotos[]" multiple><br>
+		<div class="panel panel-default">
+			<div class="panel-heading">Fotos do Anúncio</div>
+			<div class="panel-body">
+				<?php foreach ($info['fotos'] as $foto): ?>
+				<div class="foto_item">
+					<img src="images/anuncios/<?php echo $foto['url']; ?>" border="0" class="img-thumbnail" /><br />
+					<a href="excluir-foto.php?id=<?php echo $foto['id_imagem'] ?>" class="btn btn-default">Excluir</a>
+				</div>	
+
+				<?php endforeach; ?>
+			</div>
+		</div>
 	</div>
 	<input type="submit" value="Salvar" class="btn btn-default">
 	</form>

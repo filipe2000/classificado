@@ -15,7 +15,7 @@ require 'pages/header.php';
 		$titulo=addslashes($_POST['titulo']);
 		$categoria=addslashes($_POST['categoria']);
 		$valor=addslashes($_POST['valor']);
-		$descr=addslashes(utf8_decode($_POST['descr']));
+		$descr=addslashes($_POST['descr']);
 		$status=addslashes($_POST['status']);
 
 		$a->addAnuncio($titulo,$categoria,$valor,$descr,$status);

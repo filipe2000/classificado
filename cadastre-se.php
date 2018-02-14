@@ -6,7 +6,7 @@ require 'classes/usuarios.class.php';
 $u= new Usuarios();
 	if (isset($_POST['nome']) && !empty(($_POST['nome']))) 
 	{
-	$nome=addslashes(utf8_decode($_POST['nome']));
+	$nome=addslashes($_POST['nome']);
 	$email=addslashes($_POST['email'])	;
 	$senha=$_POST['senha']	;
 	$tel=addslashes($_POST['tel'])	;

@@ -1,7 +1,10 @@
-<?php require 'config.php'; ?>
+<?php require 'config.php';
+header('Content-Type: text/html; charset=UTF-8');
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Classificados</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -9,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="js/bootstrap.js">
 	<link rel="stylesheet" type="text/css" href="js/bootstrap.min.js">
 	<link rel="stylesheet" type="text/css" href="js/script.js">
+	
 
 </head>
 <body>

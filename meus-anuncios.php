@@ -33,14 +33,14 @@ exit;
 	<tr>
 		<td>
 			<?php
-			if(!empty($anuncio['url'])):
-			echo '<img src="images/anuncios/<?php $anuncio["url"];?>" border="0" class="imgAnuncio">';		
+			if(!empty($anuncio['url'])):				
+			$img=$anuncio['url']; echo '<img src="images/anuncios/'.$img.'" border="0" class="imgAnuncio">';
 			else:
 			echo '<img src="images/anuncios/default.png" border="0" class="imgAnuncio">';
 			endif;	
 			?>
 		</td>
-		<td><?php  echo $anuncio['titulo']; ?></td>
+		<td><?php  echo utf8_encode($anuncio['titulo']); ?></td>
 		<td><?php  echo "R$ ".number_format($anuncio['valor'],2); ?></td>
 		<td>
 			<a href="editar-anuncio.php?id=<?php echo $anuncio['id_anuncio']?>" 
