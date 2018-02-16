@@ -12,7 +12,7 @@ exit;
 <div class="container">
 <h2>Meus Anúncios</h2>
 <a href="add-anuncio.php" class="btn btn-default">+ Add Anuncio</a>
-<table class="table table-striped">
+<table class="table table-striped table-anuncio">
 	<thead>
 	<tr>
 		<th>Foto</th>

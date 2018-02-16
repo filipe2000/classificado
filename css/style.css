@@ -1,5 +1,6 @@
 .imgAnuncio{
-	width: 50px;
+	max-width: 50px;
+	max-height: 50px;
 }
 .foto_item{
 	width: 150px;
@@ -10,4 +11,7 @@
 }
 .foto_item img{
 	width: 150px;
+}
+.table-anuncio{
+	max-width:80% !important;
 }

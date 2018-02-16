@@ -4,7 +4,7 @@ header('Content-Type: text/html; charset=UTF-8');
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Classificados</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -26,7 +26,7 @@ header('Content-Type: text/html; charset=UTF-8');
 			<li><a href="meus-anuncios.php">Meus Anúncios</a></li>
 			<li><a href="sair.php">Sair</a></li>
 		<?php else: ?>	
-			<li><a href="cadastre-se.php">Cadsatre-se</a></li>
+			<li><a href="cadastre-se.php">Cadastre-se</a></li>
 			<li><a href="login.php">Login</a></li>
 			<?php endif; ?>
 		</ul>

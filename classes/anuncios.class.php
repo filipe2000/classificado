@@ -1,6 +1,35 @@
 <?php
  class Anuncios
  {
+ 	public function getTotalAnuncios()
+ 	{
+ 		global $pdo;
+ 		$sql=$pdo->query("select count(*) as c from tb_anuncio");
+ 		$row=$sql->fetch();
+ 		return $row['c'];
+ 	}
+ 	public function getUltimosAnuncios($p, $qtd)
+ 	{
+ 		global $pdo;
+ 		//n de pg multiplicado pela qtd a exibir
+ 		$offsetpg=($p-1)* $qtd;
+ 		$array= array();
+ 		$sql=$pdo->prepare("
+ 			select *,
+ 			(select i.url from tb_imagens  i
+ 			where i.id_anuncio=a.id_anuncio limit 1) as url,
+ 			(select c.nome_cat from tb_categoria c 
+ 			where c.id_cat=a.id_cat) as cat 
+ 			from tb_anuncio a ORDER BY a.id_anuncio desc limit $offsetpg,$qtd");
+ 		
+ 		$sql->execute();
+
+ 		if ($sql->rowCount()>0)
+ 		{
+ 		$array=$sql->fetchAll();
+ 		}
+ 		return $array;
+ 	}
  	public function getMeusAnuncios()
  	{
  		global $pdo;
@@ -9,7 +38,7 @@
  			select *,
  			(select tb_imagens.url from tb_imagens 
  			where tb_imagens.id_anuncio=tb_anuncio.id_anuncio limit 1) as url 
- 			from tb_anuncio where id_user=:id_user");
+ 			from tb_anuncio where id_user=:id_user order by id_anuncio desc");
  		$sql->bindValue(":id_user", $_SESSION['cLogin']);
  		$sql->execute();
 

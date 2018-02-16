@@ -18,7 +18,7 @@ require 'pages/header.php';
 		$descr=addslashes($_POST['descr']);
 		$status=addslashes($_POST['status']);
 
-		$a->addAnuncio($titulo,$categoria,$valor,$descr,$status);
+		$a->addAnuncio(utf8_encode($titulo),$categoria,$valor,utf8_encode($descr),$status);
 		?>
 		<div class="alert alert-success">Adicionado com sucesso.</div>
 		<?php

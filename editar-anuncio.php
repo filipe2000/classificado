@@ -25,7 +25,7 @@ require 'pages/header.php';
 			$fotos=array();
 		}
 
-		$a->updateAnuncio($titulo,$categoria,$valor,$descr,$status,$fotos, $_GET['id']);
+		$a->updateAnuncio(utf8_encode($titulo),$categoria,$valor,utf8_encode($descr),$status,$fotos, $_GET['id']);
 		?>
 		<div class="alert alert-success">Atualizado com sucesso.</div>
 		<?php
