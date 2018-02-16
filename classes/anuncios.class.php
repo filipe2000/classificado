@@ -20,7 +20,7 @@
  			where i.id_anuncio=a.id_anuncio limit 1) as url,
  			(select c.nome_cat from tb_categoria c 
  			where c.id_cat=a.id_cat) as cat 
- 			from tb_anuncio a ORDER BY a.id_anuncio desc limit $offsetpg,$qtd");
+ 			from tb_anuncio a ORDER BY a.id_anuncio desc limit $offsetpg, $qtd");
  		
  		$sql->execute();
 

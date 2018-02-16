@@ -1,4 +1,3 @@
-<!-- INICIAR AULA 10 -->
 <?php require 'pages/header.php' ?>
 <?php  
 require 'classes/anuncios.class.php';
@@ -36,17 +35,15 @@ $anuncios=$a->getUltimosAnuncios($p,$qtd);
 					<?php foreach($anuncios as $anuncio): ?>
 					<tr>
 						<td style="width:60px !important;">
-							<?php if(!empty($anuncio)): ?>
+							<?php if(!empty($anuncio['url'])): ?>
 								<img src="images/anuncios/<?php echo $anuncio['url']; ?>" class="imgAnuncio" border="0">
 							<?php else: ?>
 								<img src="images/anuncios/default.jpg" class="imgAnuncio" border="0">	
 							<?php endif; ?>	
 						</td>
-						<td>
-							<a href="produto.php?id=
-							<?php echo $anuncio['id_produto']; ?>"><?php echo utf8_encode($anuncio['titulo']); ?>
-							</a><br/>
-							<?php echo utf8_encode($anuncio['cat']); ?>
+						<td>						
+							<a href="produto.php?id=<?php echo $anuncio['id_anuncio']; ?>"><?php echo $anuncio['titulo']; ?></a><br/>
+							<?php echo $anuncio['cat']; ?>
 						</td>
 						<td>R$
 						<?php echo number_format($anuncio['valor'],2); ?>
