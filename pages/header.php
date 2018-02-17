@@ -6,13 +6,14 @@ header('Content-Type: text/html; charset=UTF-8');
 <head>
 
 	<title>Classificados</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="js/jquery-3.3.1.js">
-	<link rel="stylesheet" type="text/css" href="js/bootstrap.js">
-	<link rel="stylesheet" type="text/css" href="js/bootstrap.min.js">
-	<link rel="stylesheet" type="text/css" href="js/script.js">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+	<script src="js/jquery-3.3.1.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/script.js"></script>
+
 
 </head>
 <body>

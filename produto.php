@@ -38,8 +38,9 @@ echo "<img src=images/anuncios/".$foto['url'].">";
 
 				</div>
 				<a class="left carousel-control" href="#meuCarousel" role="button" data-slide="prev">
-				<h1><</h1></a>
-				<a class="rigth carousel-control" href="#meuCarousel" role="button" data-slide="next"><h1>></h1></a>
+				<span><</span></a>
+				<a class=" carousel-control-rigth" href="#meuCarousel" role="button" data-slide="next">
+				<span>></span></a>
 
 			</div>
 		</div>

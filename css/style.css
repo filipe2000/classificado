@@ -15,3 +15,30 @@
 .table-anuncio{
 	max-width:80% !important;
 }
+/*substitui o boostrap*/
+a.carousel-control-rigth{
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 368px;
+    width: 15%;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    opacity: .5;
+    background-image: linear-gradient(to left,rgba(0,0,0,0.5) 0,rgba(0,0,0,0.0001) 100%);
+    background-repeat: repeat-x;
+    text-decoration: none;
+}
+
+a.carousel-control-rigth:hover {
+    color: #fff;
+    text-decoration: none;
+    outline: 0;
+    opacity: .9;
+}
+span{
+	    vertical-align: middle;
+    line-height: 200px;
+}
