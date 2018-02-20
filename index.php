@@ -13,7 +13,7 @@ if(isset($_GET['p']) && !empty($_GET['p']))
 {
 $p=addslashes($_GET['p']);
 }
-$qtd=3;	//arredondar total	para maior
+$qtd=5;	//arredondar total	para maior
 
 $totalpg=ceil($total_anuncios / $qtd);
 $anuncios=$a->getUltimosAnuncios($p,$qtd);
