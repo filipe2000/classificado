@@ -134,7 +134,10 @@ public function getAnuncio($id)
  	{
  		global $pdo;
  		$array= array();
- 		$sql=$pdo->prepare("select * from tb_anuncio where id_anuncio=:id");
+ 		$sql=$pdo->prepare("select *,
+ 		(select c.nome_cat from tb_categoria c where c.id_cat=a.id_cat) as cat,
+ 		(select u.tel from tb_user u where u.id_user=a.id_user) as tel
+ 			from tb_anuncio a where a.id_anuncio=:id");
  		$sql->bindValue(":id", $id);
  		$sql->execute();
 

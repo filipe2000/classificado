@@ -45,7 +45,12 @@ echo "<img src=images/anuncios/".$foto['url'].">";
 			</div>
 		</div>
 		<div class="col-sm-8"> 
-			
+			<h1><?php echo  $info['titulo']; ?></h1>
+			<h4><?php echo  $info['cat']; ?></h4>
+			<p><?php echo  $info['descr']; ?></p>
+			<br />
+			<h3>R$ <?php  echo "R$ ".number_format($info['valor'],2); ?></h3>
+			<h4>Tel: <?php echo  $info['tel']; ?></h4>
 		</div>
 	</div>
 
