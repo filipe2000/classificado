@@ -2,10 +2,22 @@
 <?php  
 require 'classes/anuncios.class.php';
 require 'classes/usuarios.class.php';
+require 'classes/categorias.class.php';
 $a = new Anuncios();
 $u= new Usuarios();
+$c= new Categorias();
 $total_anuncios= $a->getTotalAnuncios();
 $total_usuarios=$u->getTotalUsuarios();
+
+$filtros= array(
+	'categoria' ==> '',
+	'preco' ==> '',
+	'estado' ==> ''
+	);
+if (isset($_GET['filtros']))
+{
+	
+}
 
 //para paginação
 $p=1; 
@@ -17,6 +29,7 @@ $qtd=5;	//arredondar total	para maior
 
 $totalpg=ceil($total_anuncios / $qtd);
 $anuncios=$a->getUltimosAnuncios($p,$qtd);
+$cats=$c->getLista();
 
  ?>
 <div class="container-fluid">
@@ -27,6 +40,44 @@ $anuncios=$a->getUltimosAnuncios($p,$qtd);
 	<div class="row">
 		<div class="col-sm-3">
 			<h4>Pesquisa Avançada</h4>
+			<form method="GET">
+				<div class="form-group">
+				<label for="cat">Categoria:</label>
+					<select id="cat" name="filtros[cat]" class="form-control">
+					<option></option>
+						<?php foreach ($cats as $cat): ?>
+###############################################################################							aula 11 - 11min
+						<option value="<?php echo $cat['id_cat']; ?>" 
+						<?php echo ($cat['id_cat']==)? 'selected=selected':'';  ?>><?php echo utf8_encode($cat['nome_cat']); ?> </option>	
+						<?php endforeach ?>
+					</select>
+				</div>
+
+				<div class="form-group">
+				<label for="preco">Preço:</label>
+					<select id="preco" name="filtros[preco]" class="form-control">
+					<option></option>
+					<option value="0-50">R$ 0 - 50</option>
+					<option value="51-100">R$ 51 - 100</option>
+					<option value="101-200">R$ 101 - 200</option>
+					<option value="201-300">R$ 201 - 300</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+				<label for="estado">Estado de conservação:</label>
+					<select id="st" name="filtros[status]" class="form-control">
+					<option></option>
+					<option value="0">Ruim</option>
+					<option value="1">Regular</option>
+					<option value="2">Bom</option>
+					<option value="3">Ótimo</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<input type="submit" class="btn btn-info" value="Buscar">
+				</div>
+			</form>
 		</div>
 		<div class="col-sm-9"> 
 			<h4>Últimos Anúncios</h4>
