@@ -9,14 +9,14 @@ $c= new Categorias();
 $total_anuncios= $a->getTotalAnuncios();
 $total_usuarios=$u->getTotalUsuarios();
 
-$filtros= array(
-	'categoria' ==> '',
-	'preco' ==> '',
-	'estado' ==> ''
+$filtros = array(
+	'id_cat' => '',
+	'valor' => '',
+	'status' => ''
 	);
 if (isset($_GET['filtros']))
 {
-	
+	$filtros=$_GET['filtros'];
 }
 
 //para paginação
@@ -28,7 +28,7 @@ $p=addslashes($_GET['p']);
 $qtd=5;	//arredondar total	para maior
 
 $totalpg=ceil($total_anuncios / $qtd);
-$anuncios=$a->getUltimosAnuncios($p,$qtd);
+$anuncios=$a->getUltimosAnuncios($p,$qtd, $filtros);
 $cats=$c->getLista();
 
  ?>
@@ -43,35 +43,42 @@ $cats=$c->getLista();
 			<form method="GET">
 				<div class="form-group">
 				<label for="cat">Categoria:</label>
-					<select id="cat" name="filtros[cat]" class="form-control">
+					<select id="id_cat" name="filtros[id_cat]" class="form-control">
 					<option></option>
 						<?php foreach ($cats as $cat): ?>
-###############################################################################							aula 11 - 11min
 						<option value="<?php echo $cat['id_cat']; ?>" 
-						<?php echo ($cat['id_cat']==)? 'selected=selected':'';  ?>><?php echo utf8_encode($cat['nome_cat']); ?> </option>	
+						<?php echo ($cat['id_cat'] == $filtros['id_cat'])? 'selected=selected':'';  ?>><?php echo utf8_encode($cat['nome_cat']); ?> </option>	
 						<?php endforeach ?>
 					</select>
 				</div>
 
 				<div class="form-group">
-				<label for="preco">Preço:</label>
-					<select id="preco" name="filtros[preco]" class="form-control">
+				<label for="valor">Preço:</label>
+					<select id="valor" name="filtros[valor]" class="form-control">
 					<option></option>
-					<option value="0-50">R$ 0 - 50</option>
-					<option value="51-100">R$ 51 - 100</option>
-					<option value="101-200">R$ 101 - 200</option>
-					<option value="201-300">R$ 201 - 300</option>
+					<option value="0-50" 
+					<?php echo ($cat['id_cat'] == $filtros['valor'])? '0 - 50':'';  ?> >R$ 0 - 50</option>
+					<option value="51-100" 
+					<?php echo ($cat['id_cat'] == $filtros['valor'])? '51 - 100':'';  ?>>R$ 51 - 100</option>
+					<option value="101-200"
+					<?php echo ($cat['id_cat'] == $filtros['valor'])? '101 - 200':'';  ?>>R$ 101 - 200</option>
+					<option value="201-300" 
+					<?php echo ($cat['id_cat'] == $filtros['valor'])? '201 - 300':'';  ?>>R$ 201 - 300</option>
 					</select>
 				</div>
 
 				<div class="form-group">
-				<label for="estado">Estado de conservação:</label>
+				<label for="status">Estado de conservação:</label>
 					<select id="st" name="filtros[status]" class="form-control">
 					<option></option>
-					<option value="0">Ruim</option>
-					<option value="1">Regular</option>
-					<option value="2">Bom</option>
-					<option value="3">Ótimo</option>
+					<option value="0"
+					<?php echo ($cat['id_cat'] == $filtros['status'])? '0':'';  ?>>Ruim</option>
+					<option value="1" 
+					<?php echo ($cat['id_cat'] == $filtros['status'])? '1':'';  ?>>Regular</option>
+					<option value="2" 
+					<?php echo ($cat['id_cat'] == $filtros['status'])? '2':'';  ?>>Bom</option>
+					<option value="3" 
+					<?php echo ($cat['id_cat'] == $filtros['status'])? '3':'';  ?>>Ótimo</option>
 					</select>
 				</div>
 				<div class="form-group">

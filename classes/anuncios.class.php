@@ -8,20 +8,51 @@
  		$row=$sql->fetch();
  		return $row['c'];
  	}
- 	public function getUltimosAnuncios($p, $qtd)
+ 	public function getUltimosAnuncios($p, $qtd, $filtros)
  	{
  		global $pdo;
  		//n de pg multiplicado pela qtd a exibir
  		$offsetpg=($p-1)* $qtd;
  		$array= array();
+ 		//1=1 para Where sem parametros, para retornar tudo
+ 		$filtrosString=array(' 1=1 ');
+ 		if (!empty($filtros['id_cat'])) 
+ 		{
+ 			$filtrosString[]='tb_anuncio.id_cat = :id_cat';
+ 		}
+ 		if (!empty($filtros['valor'])) 
+ 		{
+ 			$filtrosString[]='tb_anuncio.valor BETWEEN :valor1 AND :valor2';
+ 		}
+ 		if (!empty($filtros['status'])) 
+ 		{
+ 			$filtrosString[]='tb_anuncio.status= :status';
+ 		}
+
+
  		$sql=$pdo->prepare("
  			select *,
  			(select i.url from tb_imagens  i
  			where i.id_anuncio=a.id_anuncio limit 1) as url,
  			(select c.nome_cat from tb_categoria c 
  			where c.id_cat=a.id_cat) as cat 
- 			from tb_anuncio a ORDER BY a.id_anuncio desc limit $offsetpg, $qtd");
- 		
+ 			from tb_anuncio where ".implode(' AND ', $filtrosString)."a ORDER BY a.id_anuncio desc limit $offsetpg, $qtd");
+
+ 		if (!empty($filtros['id_cat'])) 
+ 		{
+ 			$sql->bindValue(':id_cat', $filtros['id_cat']);
+ 		}
+ 		if (!empty($filtros['valor'])) 
+ 		{
+ 			$valor=explode('-', $filtros['valor']);
+ 			$sql->bindValue(':valor1', $filtros[0]);
+ 			$sql->bindValue(':valor2', $filtros[1]); 			
+ 		}
+ 		if (!empty($filtros['status'])) 
+ 		{
+ 			$sql->bindValue(':status', $filtros['status']); 			
+ 		}
+
  		$sql->execute();
 
  		if ($sql->rowCount()>0)
