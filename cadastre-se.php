@@ -1,5 +1,5 @@
 <?php require 'pages/header.php' ?>
-<div class="container">
+<div class="container container-body">
 <h2>Cadastre-se</h2>
 <?php
 require 'classes/usuarios.class.php';

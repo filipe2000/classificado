@@ -1,3 +1,15 @@
+.navbar-inverse{
+    max-width: 80%;
+    margin: auto;
+}
+.container-body{
+    border: 1px solid #eeeeee;
+    max-width: 80%;
+    margin: auto;
+}
+.row.sub-row{
+    margin-left: 0px;
+}
 .imgAnuncio{
 	max-width: 50px;
 	max-height: 50px;
@@ -20,7 +32,7 @@ a.carousel-control-rigth{
 	position: absolute;
     top: 0;
     bottom: 0;
-    left: 368px;
+    left: 290px;
     width: 15%;
     font-size: 20px;
     color: #fff;
@@ -52,4 +64,7 @@ span{
 .jumbotron{
     padding: 5px;
     margin-bottom:5px;
+}
+.navbar-nav.navbar-right:last-child{
+    margin-right: 0px;
 }

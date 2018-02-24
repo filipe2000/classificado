@@ -25,9 +25,26 @@ require 'pages/header.php';
 	}
 	
 ?>
-<div class="container">
+<div class="container container-body">
 	<h2>Meus Anúncios - Adicionar Anúncio</h2>
+	<div class="row sub-row">
+	<div class="col-sm-4">
 	<form method="POST" enctype="multipart/form-data">
+		<div class="form-group">
+		<label for="titulo">Titulo:</label>
+		<input type="text" name="titulo" id="titulo" class="form-control">
+		</div>
+		<div class="form-group">
+		<label for="descr">Descrição:</label>
+		<textarea class="form-control" name="descr"></textarea>		
+		</div>
+		<div class="form-group">
+		<label for="add_foto">Fotos:</label>
+		<input type="file" name="fotos[]" multiple>
+		</div>
+		<input type="submit" value="Adicionar" class="btn btn-default">
+	</div>
+	<div class="col-sm-4">
 	<div class="form-group">
 	<label for="categoria"> Categoria:</label>
 		<select name="categoria" id="categoria" class="form-control">
@@ -44,18 +61,7 @@ require 'pages/header.php';
 			?>	
 		</select>
 	</div>
-	<div class="form-group">
-		<label for="titulo">Titulo:</label>
-		<input type="text" name="titulo" id="titulo" class="form-control">
-	</div>	
-	<div class="form-group">
-		<label for="valor">Valor:</label>
-		<input type="text" id="valor" name="valor" class="form-control"/>
-	</div>
-	<div class="form-group">
-		<label for="descr">Descrição:</label>
-		<textarea class="form-control" name="descr"></textarea>		
-	</div>
+	
 	<div class="form-group">
 		<label for="status" >Status:</label>
 		<select id="status" class="form-control" name="status">
@@ -65,8 +71,14 @@ require 'pages/header.php';
 		<option value="3">Ótimo</option>
 		</select>
 	</div>
-	<input type="submit" value="Adicionar" class="btn btn-default">
+	<div class="form-group">
+		<label for="valor">Valor:</label>
+		<input type="text" id="valor" name="valor" class="form-control"/>
+		</div>
 	</form>
+	</div><!--col -->
+	
+	</div><!-- row -->
 </div>
 <?php
  require 'pages/footer.php'; 

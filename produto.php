@@ -14,14 +14,14 @@ $id= addslashes($_GET['id']);
 	<?php
 exit;
 }
-
+/*
 $info = $a->getAnuncio($id);
 foreach ($info['fotos'] as $key => $foto) {
 echo "<img src=images/anuncios/".$foto['url'].">";		
 }
-
+*/
  ?>
-<div class="container-fluid">
+<div class="container-fluid container-body">
 
 	<div class="row">
 		<div class="col-sm-4">
@@ -39,7 +39,7 @@ echo "<img src=images/anuncios/".$foto['url'].">";
 				</div>
 				<a class="left carousel-control" href="#meuCarousel" role="button" data-slide="prev">
 				<span><</span></a>
-				<a class=" carousel-control-rigth" href="#meuCarousel" role="button" data-slide="next">
+				<a class="carousel-control-rigth" href="#meuCarousel" role="button" data-slide="next">
 				<span>></span></a>
 
 			</div>

@@ -9,7 +9,7 @@ if (empty($_SESSION['cLogin']))
 exit;
 }
 ?>
-<div class="container">
+<div class="container container-body">
 <h2>Meus Anúncios</h2>
 <a href="add-anuncio.php" class="btn btn-default">+ Add Anuncio</a>
 <table class="table table-striped table-anuncio">

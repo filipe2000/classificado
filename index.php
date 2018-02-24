@@ -32,12 +32,12 @@ $anuncios=$a->getUltimosAnuncios($p,$qtd, $filtros);
 $cats=$c->getLista();
 
  ?>
-<div class="container-fluid">
+<div class="container-fluid container-body">
 <div class="jumbotron">
 	<h2>Nós temos hoje <?php echo $total_anuncios ?> anuncios</h2>
 	<p>E mais de <?php  echo $total_usuarios ?> inscritos</p>
 </div>
-	<div class="row">
+	<div class="row sub-row">
 		<div class="col-sm-3">
 			<h4>Pesquisa Avançada</h4>
 			<form method="GET">

@@ -40,9 +40,43 @@ require 'pages/header.php';
 	<?php
 }
 ?>
-<div class="container">
+<div class="container container-body">
 	<h2>Meus Anúncios - Editar Anúncio</h2>
+	
 	<form method="POST" enctype="multipart/form-data">
+<div class="row sub-row">
+<div class="col-sm-4">
+	
+	<div class="form-group">
+		<label for="titulo">Titulo:</label>
+		<input type="text" name="titulo" id="titulo" class="form-control" 
+		value="<?php echo utf8_encode($info['titulo']); ?>">
+	</div>	
+	<div class="form-group">
+		<label for="descr">Descrição:</label>
+		<textarea class="form-control" name="descr" >
+			<?php echo utf8_encode($info['descr']); ?>
+		</textarea>		
+	</div>
+	<div class="form-group">
+		<label for="add_foto">Fotos:</label>
+		<input type="file" name="fotos[]" multiple><br>
+		<div class="panel panel-default">
+			<div class="panel-heading">Fotos do Anúncio</div>
+			<div class="panel-body">
+				<?php foreach ($info['fotos'] as $foto): ?>
+				<div class="foto_item">
+					<img src="images/anuncios/<?php echo $foto['url']; ?>" border="0" class="img-thumbnail" /><br />
+					<a href="excluir-foto.php?id=<?php echo $foto['id_imagem'] ?>" class="btn btn-default">Excluir</a>
+				</div>	
+
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+	<input type="submit" value="Salvar" class="btn btn-default">
+</div>	
+<div class="col-sm-4">
 	<div class="form-group">
 	<label for="categoria"> Categoria:</label>
 		<select name="categoria" id="categoria" class="form-control">
@@ -61,22 +95,6 @@ require 'pages/header.php';
 		</select>
 	</div>
 	<div class="form-group">
-		<label for="titulo">Titulo:</label>
-		<input type="text" name="titulo" id="titulo" class="form-control" 
-		value="<?php echo utf8_encode($info['titulo']); ?>">
-	</div>	
-	<div class="form-group">
-		<label for="valor">Valor:</label>
-		<input type="text" id="valor" name="valor" class="form-control" 
-		value="<?php echo $info['valor'] ?>"/>
-	</div>
-	<div class="form-group">
-		<label for="descr">Descrição:</label>
-		<textarea class="form-control" name="descr" >
-			<?php echo utf8_encode($info['descr']); ?>
-		</textarea>		
-	</div>
-	<div class="form-group">
 		<label for="status" >Status:</label>
 		<select id="status" class="form-control" name="status">
 		<option value="0" <?php echo ($info['status']=='0')?'selected="selected"':''; ?>>Ruim</option>
@@ -85,24 +103,15 @@ require 'pages/header.php';
 		<option value="3" <?php echo ($info['status']=='3')?'selected="selected"':''; ?>>Ótimo</option>
 		</select>
 	</div>
-
 	<div class="form-group">
-		<label for="add_foto">Fotos:</label>
-		<input type="file" name="fotos[]" multiple><br>
-		<div class="panel panel-default">
-			<div class="panel-heading">Fotos do Anúncio</div>
-			<div class="panel-body">
-				<?php foreach ($info['fotos'] as $foto): ?>
-				<div class="foto_item">
-					<img src="images/anuncios/<?php echo $foto['url']; ?>" border="0" class="img-thumbnail" /><br />
-					<a href="excluir-foto.php?id=<?php echo $foto['id_imagem'] ?>" class="btn btn-default">Excluir</a>
-				</div>	
-
-				<?php endforeach; ?>
-			</div>
-		</div>
+		<label for="valor">Valor:</label>
+		<input type="text" id="valor" name="valor" class="form-control" 
+		value="<?php echo $info['valor'] ?>"/>
 	</div>
-	<input type="submit" value="Salvar" class="btn btn-default">
+	
+	
+</div><!-- col-->
+</div><!-- row-->
 	</form>
 </div>
 <?php
