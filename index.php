@@ -6,8 +6,6 @@ require 'classes/categorias.class.php';
 $a = new Anuncios();
 $u= new Usuarios();
 $c= new Categorias();
-$total_anuncios= $a->getTotalAnuncios();
-$total_usuarios=$u->getTotalUsuarios();
 
 $filtros = array(
 	'id_cat' => '',
@@ -18,6 +16,10 @@ if (isset($_GET['filtros']))
 {
 	$filtros=$_GET['filtros'];	
 }
+
+$total_anuncios= $a->getTotalAnuncios($filtros);
+$total_usuarios=$u->getTotalUsuarios();
+
 
 //para paginação
 $p=1; 
@@ -114,11 +116,14 @@ $cats=$c->getLista();
 			<ul class="pagination">
 				<?php for ($i=1; $i <= $totalpg ; $i++): ?>
 				<li 
-				class="<?php //marcação do link ativo 
-					//se página=página atual  true:false
-						echo($p==$i)?'active':'';
-						?>">
-				<a href="index.php?p=<?php echo $i; ?>"><?php echo$i;?></a></li>
+				class="<?php //marcação do link ativo ,se página=página atual  true:false
+						echo($p==$i)?'active':'';?>">
+				<a href="index.php?<?php //foi retirado o  p=
+				$w=$_GET;//add os valores do GET  em $w
+				$w['p']=$i;// add o num da paginação no vetor
+				//transforma tudo em URL
+				echo http_build_query($w);
+				?>"><?php echo $i;?></a></li>
 				<?php endfor; ?>
 			</ul>
 		</div>

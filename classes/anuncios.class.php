@@ -1,10 +1,44 @@
 <?php
  class Anuncios
  {
- 	public function getTotalAnuncios()
+ 	public function getTotalAnuncios($filtros)
  	{
  		global $pdo;
- 		$sql=$pdo->query("select count(*) as c from tb_anuncio");
+ 		$filtrosString=array(' 1=1 ');
+ 		if (!empty($filtros['id_cat']) || !isset($filtros['id_cat'])) 
+ 		{
+ 			$filtrosString[]='a.id_cat = :id_cat';
+ 		}
+ 		if (!empty($filtros['valor']) || !isset($filtros['valor'])) 
+ 		{
+ 			$filtrosString[]='a.valor BETWEEN :valor1 AND :valor2';
+ 		}
+ 		if (!empty($filtros['status']) || !isset($filtros['status'])) 
+ 		{
+ 			$filtrosString[]='a.status= :status';
+ 		}
+ 		//prepare
+ 		$sql=$pdo->prepare("select count(*) as c from tb_anuncio a where "
+ 							.implode(" AND ", $filtrosString));
+ 		//bind values
+ 		if (!empty($filtros['id_cat']) || !isset($filtros['id_cat'])) 
+	 		{
+	 			$sql->bindValue(':id_cat', $filtros['id_cat']);
+	 		}
+	 		if (!empty($filtros['valor']) || !isset($filtros['valor'])) 
+	 		{
+	 			$valor=explode('-', $filtros['valor']); 			
+	 			$v0= $valor[0];
+	 			$v1= $valor[1]; 			
+	 			$sql->bindValue(':valor1', $v0);
+	 			$sql->bindValue(':valor2', $v1); 			
+	 		}
+	 		if (!empty($filtros['status']) || !isset($filtros['status'])) 
+	 		{
+	 			$sql->bindValue(':status', $filtros['status']); 			
+	 		}
+
+ 		$sql->execute();
  		$row=$sql->fetch();
  		return $row['c'];
  	}
