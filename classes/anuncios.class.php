@@ -16,51 +16,72 @@
  		$array= array();
  		//1=1 para Where sem parametros, para retornar tudo
  		$filtrosString=array(' 1=1 ');
- 		if (!empty($filtros['id_cat'])) 
+ 		if (!empty($filtros['id_cat']) || !isset($filtros['id_cat'])) 
  		{
- 			$filtrosString[]='tb_anuncio.id_cat = :id_cat';
+ 			$filtrosString[]='a.id_cat = :id_cat';
  		}
- 		if (!empty($filtros['valor'])) 
+ 		if (!empty($filtros['valor']) || !isset($filtros['valor'])) 
  		{
- 			$filtrosString[]='tb_anuncio.valor BETWEEN :valor1 AND :valor2';
+ 			$filtrosString[]='a.valor BETWEEN :valor1 AND :valor2';
  		}
- 		if (!empty($filtros['status'])) 
+ 		if (!empty($filtros['status']) || !isset($filtros['status'])) 
  		{
- 			$filtrosString[]='tb_anuncio.status= :status';
- 		}
-
-
- 		$sql=$pdo->prepare("
- 			select *,
- 			(select i.url from tb_imagens  i
- 			where i.id_anuncio=a.id_anuncio limit 1) as url,
- 			(select c.nome_cat from tb_categoria c 
- 			where c.id_cat=a.id_cat) as cat 
- 			from tb_anuncio where ".implode(' AND ', $filtrosString)."a ORDER BY a.id_anuncio desc limit $offsetpg, $qtd");
-
- 		if (!empty($filtros['id_cat'])) 
- 		{
- 			$sql->bindValue(':id_cat', $filtros['id_cat']);
- 		}
- 		if (!empty($filtros['valor'])) 
- 		{
- 			$valor=explode('-', $filtros['valor']);
- 			$sql->bindValue(':valor1', $filtros[0]);
- 			$sql->bindValue(':valor2', $filtros[1]); 			
- 		}
- 		if (!empty($filtros['status'])) 
- 		{
- 			$sql->bindValue(':status', $filtros['status']); 			
+ 			$filtrosString[]='a.status= :status';
  		}
 
- 		$sql->execute();
+ 		try 
+ 		{ 			
+	 		$sql=$pdo->prepare("select *, 
+	 			(select i.url from tb_imagens i where i.id_anuncio=a.id_anuncio limit 1) as url, 
+	 			(select c.nome_cat from tb_categoria c where c.id_cat=a.id_cat) as nome_cat 
+	 			from tb_anuncio a 
+	 			where "
+	 			.implode(' AND ', $filtrosString).
+	 			" ORDER BY a.id_anuncio desc limit $offsetpg, $qtd");
 
- 		if ($sql->rowCount()>0)
- 		{
- 		$array=$sql->fetchAll();
+	 		if (!empty($filtros['id_cat']) || !isset($filtros['id_cat'])) 
+	 		{
+	 			$sql->bindValue(':id_cat', $filtros['id_cat']);
+	 		}
+	 		if (!empty($filtros['valor']) || !isset($filtros['valor'])) 
+	 		{
+	 			$valor=explode('-', $filtros['valor']); 			
+	 			$v0= $valor[0];
+	 			$v1= $valor[1]; 			
+	 			$sql->bindValue(':valor1', $v0);
+	 			$sql->bindValue(':valor2', $v1); 			
+	 		}
+	 		if (!empty($filtros['status']) || !isset($filtros['status'])) 
+	 		{
+	 			$sql->bindValue(':status', $filtros['status']); 			
+	 		}
+	 		/* for($i=0;$i<count($filtrosString);$i++)
+	 		{	echo $filtrosString[$i]."<br>";		}*/
+	 		$sql->execute();
+
+	 		//echo $sql->rowCount();	
+	 		if ($sql->rowCount()>0)
+	 		{	 		
+	 		$array=$sql->fetchAll();
+	 		/* exibir resultado 
+	 		echo $array[0][0].'_';
+	 		echo $array[0][1].'_';
+	 		echo $array[0][2].'_';
+	 		echo $array[0][3].'<br>';
+	 		echo $array[0][4].'_';
+	 		echo $array[0][5].'_';
+	 		echo $array[0][6].'<br>';
+	 		echo $array[0][7].'_';
+	 		echo $array[0][8];
+	 		*/
+	 		}
+
+ 		} catch (PDOException $e) {
+ 			echo $e;
  		}
  		return $array;
  	}
+
  	public function getMeusAnuncios()
  	{
  		global $pdo;

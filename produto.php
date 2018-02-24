@@ -14,12 +14,12 @@ $id= addslashes($_GET['id']);
 	<?php
 exit;
 }
-/*
+
 $info = $a->getAnuncio($id);
 foreach ($info['fotos'] as $key => $foto) {
 echo "<img src=images/anuncios/".$foto['url'].">";		
 }
-*/
+
  ?>
 <div class="container-fluid">
 

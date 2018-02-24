@@ -16,7 +16,7 @@ $filtros = array(
 	);
 if (isset($_GET['filtros']))
 {
-	$filtros=$_GET['filtros'];
+	$filtros=$_GET['filtros'];	
 }
 
 //para paginação
@@ -57,28 +57,28 @@ $cats=$c->getLista();
 					<select id="valor" name="filtros[valor]" class="form-control">
 					<option></option>
 					<option value="0-50" 
-					<?php echo ($cat['id_cat'] == $filtros['valor'])? '0 - 50':'';  ?> >R$ 0 - 50</option>
+					<?php echo ($filtros['valor']=='0-50')? 'selected="selected"':'';  ?> >R$ 0 - 50</option>
 					<option value="51-100" 
-					<?php echo ($cat['id_cat'] == $filtros['valor'])? '51 - 100':'';  ?>>R$ 51 - 100</option>
+					<?php echo ($filtros['valor']=='51-100')? 'selected="selected"':''; ?>>R$ 51 - 100</option>
 					<option value="101-200"
-					<?php echo ($cat['id_cat'] == $filtros['valor'])? '101 - 200':'';  ?>>R$ 101 - 200</option>
+					<?php echo ($filtros['valor']=='101-200')? 'selected="selected"':'';  ?>>R$ 101 - 200</option>
 					<option value="201-300" 
-					<?php echo ($cat['id_cat'] == $filtros['valor'])? '201 - 300':'';  ?>>R$ 201 - 300</option>
+					<?php echo ($filtros['valor']=='201-300')? 'selected="selected"':'';  ?>>R$ 201 - 300</option>
 					</select>
 				</div>
 
 				<div class="form-group">
 				<label for="status">Estado de conservação:</label>
-					<select id="st" name="filtros[status]" class="form-control">
+					<select id="status" name="filtros[status]" class="form-control">
 					<option></option>
 					<option value="0"
-					<?php echo ($cat['id_cat'] == $filtros['status'])? '0':'';  ?>>Ruim</option>
+					<?php echo ($filtros['status']=='0')? 'selected="selected"':'';  ?>>Ruim</option>
 					<option value="1" 
-					<?php echo ($cat['id_cat'] == $filtros['status'])? '1':'';  ?>>Regular</option>
+					<?php echo ($filtros['status']=='1')? 'selected="selected"':'';  ?>>Regular</option>
 					<option value="2" 
-					<?php echo ($cat['id_cat'] == $filtros['status'])? '2':'';  ?>>Bom</option>
+					<?php echo ($filtros['status']=='2')? 'selected="selected"':'';  ?>>Bom</option>
 					<option value="3" 
-					<?php echo ($cat['id_cat'] == $filtros['status'])? '3':'';  ?>>Ótimo</option>
+					<?php echo ($filtros['status']=='3')? 'selected="selected"':'';  ?>>Ótimo</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -101,7 +101,7 @@ $cats=$c->getLista();
 						</td>
 						<td>						
 							<a href="produto.php?id=<?php echo $anuncio['id_anuncio']; ?>"><?php echo $anuncio['titulo']; ?></a><br/>
-							<?php echo $anuncio['cat']; ?>
+							<?php echo $anuncio['nome_cat']; ?>
 						</td>
 						<td>R$
 						<?php echo number_format($anuncio['valor'],2); ?>
