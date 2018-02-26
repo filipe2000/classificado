@@ -51,7 +51,7 @@ $u= new Usuarios();
 	</div>
 	<div class="form-group">
 	<label for="tel">Telefone: </label>
-	<input type="text" name="tel" id="tel" class="form-conteol">
+	<input type="text" name="tel" id="tel" class="form-conteol" placeholder="(__)_________">
 	</div>
 	<input type="submit" value="Cadastrar" class="btn btn-default">
 </form>

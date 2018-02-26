@@ -40,6 +40,8 @@ require 'pages/header.php';
 	<?php
 }
 ?>
+
+</script>
 <div class="container container-body">
 	<h2>Meus Anúncios - Editar Anúncio</h2>
 	
@@ -58,22 +60,7 @@ require 'pages/header.php';
 			<?php echo utf8_encode($info['descr']); ?>
 		</textarea>		
 	</div>
-	<div class="form-group">
-		<label for="add_foto">Fotos:</label>
-		<input type="file" name="fotos[]" multiple><br>
-		<div class="panel panel-default">
-			<div class="panel-heading">Fotos do Anúncio</div>
-			<div class="panel-body">
-				<?php foreach ($info['fotos'] as $foto): ?>
-				<div class="foto_item">
-					<img src="images/anuncios/<?php echo $foto['url']; ?>" border="0" class="img-thumbnail" /><br />
-					<a href="excluir-foto.php?id=<?php echo $foto['id_imagem'] ?>" class="btn btn-default">Excluir</a>
-				</div>	
-
-				<?php endforeach; ?>
-			</div>
-		</div>
-	</div>
+	
 	<input type="submit" value="Salvar" class="btn btn-default">
 </div>	
 <div class="col-sm-4">
@@ -112,6 +99,26 @@ require 'pages/header.php';
 	
 </div><!-- col-->
 </div><!-- row-->
+<div class="row sub-row">
+	<div class="col-sm-12">
+		<div class="form-group">
+		<label for="add_foto">Fotos:</label>
+		<input type="file" name="fotos[]" multiple><br>
+		<div class="panel panel-default">
+			<div class="panel-heading">Fotos do Anúncio</div>
+			<div class="panel-body">
+				<?php foreach ($info['fotos'] as $foto): ?>
+				<div class="foto_item">
+					<img src="images/anuncios/<?php echo $foto['url']; ?>" border="0" class="img-thumbnail" /><br />
+					<a href="excluir-foto.php?id=<?php echo $foto['id_imagem'] ?>" class="btn btn-default">Excluir</a>
+				</div>	
+
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
 	</form>
 </div>
 <?php

@@ -25,6 +25,10 @@ require 'pages/header.php';
 	}
 	
 ?>
+
+
+
+
 <div class="container container-body">
 	<h2>Meus Anúncios - Adicionar Anúncio</h2>
 	<div class="row sub-row">
@@ -73,7 +77,7 @@ require 'pages/header.php';
 	</div>
 	<div class="form-group">
 		<label for="valor">Valor:</label>
-		<input type="text" id="valor" name="valor" class="form-control"/>
+		<input type="text" id="valor" name="valor" class="form-control" placeholder="0.00" />
 		</div>
 	</form>
 	</div><!--col -->

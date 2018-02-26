@@ -10,11 +10,18 @@ header('Content-Type: text/html; charset=UTF-8');
 	
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script src="js/jquery-3.3.1.js"></script>
+	<script src="js/jquery.maskmoney.min.js"></script>
+	<script src="js/jquery.maskedinput.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/script.js"></script>
+	<script type="text/javascript">
+$(function(){
+	$("#valor").maskMoney();
+	$("#tel").mask("(99)99999999");
+});
 
-
+</script>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
