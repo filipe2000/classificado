@@ -36,7 +36,8 @@ $cats=$c->getLista();
  ?>
 <div class="container-fluid container-body">
 <div class="jumbotron">
-	<h2>Nós temos hoje <?php echo $total_anuncios ?> anuncios</h2>
+	<h2>Nós temos hoje <?php echo $total_anuncios ?> anuncio(s) 
+	</h2>
 	<p>E mais de <?php  echo $total_usuarios ?> inscritos</p>
 </div>
 	<div class="row sub-row">
