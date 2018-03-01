@@ -36,11 +36,11 @@ require 'pages/header.php';
 	<form method="POST" enctype="multipart/form-data">
 		<div class="form-group">
 		<label for="titulo">Titulo:</label>
-		<input type="text" name="titulo" id="titulo" class="form-control">
+		<input type="text" autofocus required name="titulo" id="titulo" class="form-control">
 		</div>
 		<div class="form-group">
 		<label for="descr">Descrição:</label>
-		<textarea class="form-control" name="descr"></textarea>		
+		<textarea class="form-control" required name="descr"></textarea>		
 		</div>
 		<div class="form-group">
 		<label for="add_foto">Fotos:</label>
@@ -77,7 +77,7 @@ require 'pages/header.php';
 	</div>
 	<div class="form-group">
 		<label for="valor">Valor:</label>
-		<input type="text" id="valor" name="valor" class="form-control" placeholder="0.00" />
+		<input type="text" required id="valor" name="valor" class="form-control" placeholder="0.00" />
 		</div>
 	</form>
 	</div><!--col -->

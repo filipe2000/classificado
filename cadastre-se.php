@@ -39,19 +39,19 @@ $u= new Usuarios();
 <form method="POST">
 	<div class="form-group">
 	<label for="nome">Nome: </label>
-	<input type="text" name="nome" id="nome" class="form-conteol">
+	<input type="text" required name="nome" id="nome" class="form-conteol" autofocus>
 	</div>
 	<div class="form-group">
 	<label for="email">E-mail: </label>
-	<input type="text" name="email" id="email" class="form-conteol">
+	<input type="email" required name="email" id="email" class="form-conteol">
 	</div>
 	<div class="form-group">
 	<label for="senha">Senha: </label>
-	<input type="password" name="senha" id="senha" class="form-conteol">
+	<input type="password" required name="senha" id="senha" class="form-conteol">
 	</div>
 	<div class="form-group">
 	<label for="tel">Telefone: </label>
-	<input type="text" name="tel" id="tel" class="form-conteol" placeholder="(__)_________">
+	<input type="text" required name="tel" id="tel" class="form-conteol" placeholder="(__)_________">
 	</div>
 	<input type="submit" value="Cadastrar" class="btn btn-default">
 </form>

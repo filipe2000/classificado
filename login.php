@@ -28,11 +28,11 @@ $u= new Usuarios();
 	<div class="form-group">
 	<div class="form-group">
 	<label for="email">E-mail: </label>
-	<input type="text" name="email" id="email" class="form-conteol">
+	<input type="email" autofocus required name="email" id="email" class="form-conteol">
 	</div>
 	<div class="form-group">
 	<label for="senha">Senha: </label>
-	<input type="password" name="senha" id="senha" class="form-conteol">
+	<input type="password" required name="senha" id="senha" class="form-conteol">
 	</div>
 	<input type="submit" value="Login" class="btn btn-default">
 </form>
