@@ -2,6 +2,9 @@
     max-width: 80%;
     margin: auto;
 }
+.imgAnuncio{
+    width:60px !important;
+}
 .container-body{
     border: 1px solid #eeeeee;
     max-width: 80%;
@@ -70,6 +73,6 @@ span{
 }
 
 .alert-warning,.alert-danger,.alert-success{
-    max-width: 100%;
+    max-width: 80%;
     margin: auto;
 }

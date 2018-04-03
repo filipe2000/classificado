@@ -24,11 +24,12 @@ require 'pages/header.php';
 		{
 			$fotos=array();
 		}
-
-		$a->updateAnuncio(utf8_encode($titulo),$categoria,$valor,utf8_encode($descr),$status,$fotos, $_GET['id']);
-		?>
-		<div class="alert alert-success">Atualizado com sucesso.</div>
-		<?php
+try {
+	$a->updateAnuncio(utf8_encode($titulo),$categoria,$valor,utf8_encode($descr),$status,$fotos, $_GET['id']);
+	echo '<div class="alert alert-success">Atualizado com sucesso.</div>';
+} catch (Exception $e) {
+	echo '<div class="alert alert-danger">Erro na atualização</div>\n $e';
+}
 	}
 	if(isset($_GET['id']) && !empty($_GET['id']))
 {

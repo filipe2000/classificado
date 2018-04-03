@@ -89,25 +89,13 @@
 	 		{
 	 			$sql->bindValue(':status', $filtros['status']); 			
 	 		}
-	 		/* for($i=0;$i<count($filtrosString);$i++)
-	 		{	echo $filtrosString[$i]."<br>";		}*/
+	 		
 	 		$sql->execute();
-
-	 		//echo $sql->rowCount();	
+	
 	 		if ($sql->rowCount()>0)
 	 		{	 		
 	 		$array=$sql->fetchAll();
-	 		/* exibir resultado 
-	 		echo $array[0][0].'_';
-	 		echo $array[0][1].'_';
-	 		echo $array[0][2].'_';
-	 		echo $array[0][3].'<br>';
-	 		echo $array[0][4].'_';
-	 		echo $array[0][5].'_';
-	 		echo $array[0][6].'<br>';
-	 		echo $array[0][7].'_';
-	 		echo $array[0][8];
-	 		*/
+	 		
 	 		}
 
  		} catch (PDOException $e) {
@@ -134,6 +122,80 @@
  		}
  		return $array;
  	}
+ 	public function getPdfUltimosAnuncios($id_cat,$valor,$status)
+ 	{	
+ 		global $pdo; 		
+ 		$array= array();
+ 		//1=1 para Where sem parametros, para retornar tudo
+ 		$filtrosString=array(' 1=1 ');
+ 		if (!empty($id_cat) || !isset($id_cat)) 
+ 		{
+ 			$filtrosString[]='a.id_cat = :id_cat';
+ 		}
+ 		if (!empty($valor) || !isset($valor)) 
+ 		{
+ 			$filtrosString[]='a.valor BETWEEN :valor1 AND :valor2';
+ 		}
+ 		if (!empty($status) || !isset($status)) 
+ 		{
+ 			$filtrosString[]='a.status= :status';
+ 		}
+
+ 		try 
+ 		{ 			
+	 		$sql=$pdo->prepare("select *, 
+	 			(select i.url from tb_imagens i where i.id_anuncio=a.id_anuncio limit 1) as url, 
+	 			(select c.nome_cat from tb_categoria c where c.id_cat=a.id_cat) as nome_cat 
+	 			from tb_anuncio a 
+	 			where "
+	 			.implode(' AND ', $filtrosString).
+	 			" ORDER BY a.id_anuncio desc");
+
+	 		if (!empty($id_cat) || !isset($id_cat) )
+	 		{
+	 			$sql->bindValue(':id_cat', $id_cat);
+	 		}
+	 		if (!empty($valor) || !isset($valor) )
+	 		{
+	 			$val=explode('-', $valor); 			
+	 			$v0= $val[0];
+	 			$v1= $val[1]; 			
+	 			$sql->bindValue(':valor1', $v0);
+	 			$sql->bindValue(':valor2', $v1); 			
+	 		}
+	 		if (!empty($status) || !isset($status) )
+	 		{
+	 			$sql->bindValue(':status',$status); 			
+	 		}
+	 		
+	 		$sql->execute();
+	
+	 		if ($sql->rowCount()>0)
+	 		{	 		
+	 		$array=$sql->fetchAll();
+	 		
+	 		}
+
+ 		} catch (PDOException $e) {
+ 			echo $e;
+ 		}
+ 		return $array;
+ 	}
+
+ /*	public function getAllAnuncios()
+ 	{
+ 		global $pdo;
+ 		$array= array();
+ 		$sql=$pdo->prepare("select *, 
+	 			(select i.url from tb_imagens i where i.id_anuncio=a.id_anuncio limit 1) as url, 
+	 			(select c.nome_cat from tb_categoria c where c.id_cat=a.id_cat) as nome_cat 
+	 			from tb_anuncio a order by a.id_anuncio desc"); 		
+ 		$sql->execute();
+ 		if ($sql->rowCount()>0) 		{
+ 		$array=$sql->fetchAll();
+ 		}
+ 		return $array;
+ 	}*/
 
  public function addAnuncio($titulo,$categoria,$valor,$descr,$status)
  {

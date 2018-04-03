@@ -1,5 +1,9 @@
-<?php require 'pages/header.php' ?>
-<?php  
+
+
+<?php 
+
+require 'vendor/autoload.php';
+require 'pages/header.php' ;
 require 'classes/anuncios.class.php';
 require 'classes/usuarios.class.php';
 require 'classes/categorias.class.php';
@@ -7,11 +11,20 @@ $a = new Anuncios();
 $u= new Usuarios();
 $c= new Categorias();
 
+$log= new Monolog\Logger("error-".time());
+$log->pushHandler(new Monolog\Handler\StreamHandler('erros.log',Monolog\Logger::WARNING));
+$log->addError("Aviso , erro!");
+
+
+
 $filtros = array(
 	'id_cat' => '',
 	'valor' => '',
 	'status' => ''
 	);
+$id_cat='';
+$valor='';
+$status='';
 if (isset($_GET['filtros']))
 {
 	$filtros=$_GET['filtros'];	
@@ -31,9 +44,25 @@ $qtd=5;	//arredondar total	para maior
 
 $totalpg=ceil($total_anuncios / $qtd);
 $anuncios=$a->getUltimosAnuncios($p,$qtd, $filtros);
+
+
 $cats=$c->getLista();
 
  ?>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#id_cat').change(function(){
+		$('#frmPesq').submit();
+	});
+	$('#valor').change(function(){
+		$('#frmPesq').submit();
+	});
+	$('#status').change(function(){
+		$('#frmPesq').submit();
+	});
+});
+</script>
+
 <div class="container-fluid container-body">
 <div class="jumbotron">
 	<h2>Nós temos hoje <?php echo $total_anuncios ?> anuncio(s) 
@@ -43,7 +72,7 @@ $cats=$c->getLista();
 	<div class="row sub-row">
 		<div class="col-sm-3">
 			<h4>Pesquisa Avançada</h4>
-			<form method="GET">
+			<form method="GET" id="frmPesq">
 				<div class="form-group">
 				<label for="cat">Categoria:</label>
 					<select id="id_cat" name="filtros[id_cat]" class="form-control">
@@ -85,17 +114,28 @@ $cats=$c->getLista();
 					</select>
 				</div>
 				<div class="form-group">
-					<input type="submit" class="btn btn-info" value="Buscar">
+					<?php
+					$id_cat=$filtros['id_cat'];
+					$valor=$filtros['valor'];
+					$status=$filtros['status'];					
+					?>	
+					
+					<input type="submit" class="btn btn-info" value="Buscar" id="btbuscar">
+					<a href="relAll.php?filtro[]=<?php echo $id_cat; ?>&
+										filtro[]=<?php echo $valor; ?>&
+										filtro[]=<?php echo $status;?>" 
+					target="_blank" class="btn btn-default" id="btrel">Relatório</a>
 				</div>
 			</form>
 		</div>
 		<div class="col-sm-9"> 
+		<?php   ?>
 			<h4>Últimos Anúncios</h4>
 			<table class="table table-striped table-anuncio">
 				<tbody>
 					<?php foreach($anuncios as $anuncio): ?>
 					<tr>
-						<td style="width:60px !important;">
+						<td class="imgAnuncio">
 							<?php if(!empty($anuncio['url'])): ?>
 								<img src="images/anuncios/<?php echo $anuncio['url']; ?>" class="imgAnuncio" border="0">
 							<?php else: ?>
@@ -113,6 +153,9 @@ $cats=$c->getLista();
 					<?php endforeach; ?>	
 				</tbody>
 			</table>
+			<?php
+				
+			?>
 			<!-- bootstrap -->
 			<ul class="pagination">
 				<?php for ($i=1; $i <= $totalpg ; $i++): ?>
@@ -131,4 +174,7 @@ $cats=$c->getLista();
 	</div>
 
 </div>
-<?php require 'pages/footer.php' ?>
+<?php 
+require 'pages/footer.php';
+
+?>

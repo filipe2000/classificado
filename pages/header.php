@@ -21,7 +21,9 @@ $(function(){
 	$("#tel").mask("(99)99999999");
 });
 
+
 </script>
+
 </head>
 <body>
 <nav class="navbar navbar-inverse">
